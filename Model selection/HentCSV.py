@@ -3,10 +3,8 @@ import pandas as pd
 
 ####Hent af data ####
 
-df = pd.read_csv("CPET_ProcessedData.csv")
+df = pd.read_csv("Model selection/CPET_ProcessedData.csv")
 
-
-# patient_ids = df.iloc[:, 0]   # gem ID (til SHAP senere)
 
 df = df.iloc[:,3:] #Fjerner de 2 første søjler med patient ID og køn. Iloc gør at alle rækker starter fra søjle 3 og frem 
 
