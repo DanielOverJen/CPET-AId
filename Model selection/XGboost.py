@@ -50,6 +50,7 @@ patientX_test = X_test[:, ChosenFeatures]
 sample = pd.DataFrame([patientX_test[test_index]], columns=feature_names[ChosenFeatures])
 
 print("\nPatient 154's data:")
+print(CPETAIdModel.predict_proba([patientX_test[test_index]]))
 print(sample.T)
 
 np.set_printoptions(suppress=True) #Sørger lige for at printet ikke printes med videnskabelig notation e-01 f.eks.
