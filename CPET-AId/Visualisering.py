@@ -10,7 +10,7 @@ def Barchart(data):
     bar_chart.height = 125
 
     values = [
-        data["Kardial"],
+        data["Kardiel"],
         data["Pulmonal"],
         data["Muskulært"],
         data["Rask"]
