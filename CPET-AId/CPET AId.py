@@ -11,7 +11,7 @@ def CPET_AId(data):
         # parameters[(VO2_name,VO2_value),("PVO2",10%)]
                 
         barchart = visualization(CPET_AId_proba[])
-
+        
         PDF_print(barchart, cardiac_post_processed, pulmo_post_processed, musco_post_processed, healthy_post_processed, R_validation)
     else:
         PDF_print_error()
