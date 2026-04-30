@@ -1,25 +1,25 @@
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-from reportlab.graphics import renderPDF
 from Visualisering import Barchart
 
-CPET_data = {
-    "Kardiel":45,
-    "Pulmonal":45,
-    "Muskulært": 27,
-    "Rask":5
-    }
-table_data = [
-    ["Fysiologisk system","Sandsynlighed [%]"],
-    ["Kardiel", CPET_data["Kardiel"]],
-    ["Pulmonal", CPET_data["Pulmonal"]],
-    ["Muskulært", CPET_data["Muskulært"]],
-    ["Rask", CPET_data["Rask"]]
-    ]
+# CPET_data = {
+#     "Kardiel":45,
+#     "Pulmonal":45,
+#     "Muskulært": 27,
+#     "Rask":5
+#     }
+# table_data = [
+#     ["Fysiologisk system","Sandsynlighed [%]"],
+#     ["Kardiel", CPET_data["Kardiel"]],
+#     ["Pulmonal", CPET_data["Pulmonal"]],
+#     ["Muskulært", CPET_data["Muskulært"]],
+#     ["Rask", CPET_data["Rask"]]
+#     ]
 
 def repport(filename, title=None, barchart = None, filepath = None, R_validation=False):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
+    from reportlab.pdfgen import canvas
+    from reportlab.lib.pagesizes import A4
+    from reportlab.graphics import renderPDF
     from reportlab.lib import colors
     from reportlab.graphics.shapes import Drawing
 
@@ -124,12 +124,12 @@ def PDF_error():
     c.drawText(error_messagge)
     c.save()
 
-repport("CPET AId","CPET AId Resultat",
-        barchart=Barchart(CPET_data),
-        filepath="CPET-AId/Beslutningsplot_eksempel.png",
-        R_validation=False)#kun til debugging
+# repport("CPET AId","CPET AId Resultat",
+#         barchart=Barchart(CPET_data),
+#         filepath="CPET-AId/Beslutningsplot_eksempel.png",
+#         R_validation=False)#kun til debugging
 
-PDF_error()
+# PDF_error()
 
 
     
