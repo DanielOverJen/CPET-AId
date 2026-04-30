@@ -30,7 +30,7 @@ def post_processing(Peak_R, pre_processed_data):
             f"Procentmæssig afvigelse fra forventet Peak VO2 \n = {pre_processed_data[0]} %",
             f"Peak minutventilation (VE) \n = {pre_processed_data[1]} L/min",
             f"Hældningen af O2-pulsen i testens første halvdel \n = {pre_processed_data[2]}",
-            f"Spredningen af den ventilatoriske ækvivalent for CO2 \n = {pre_processed_data[3]}",
+            f"Spredningen af VE/VCO2 \n = {pre_processed_data[3]}",
             f"Procentmæssig afvigelse fra forventet Peak O2-puls \n = {pre_processed_data[4]} %",
             f"Hældningen af VO2 i testens første halvdel \n = {pre_processed_data[5]}"
         ]
