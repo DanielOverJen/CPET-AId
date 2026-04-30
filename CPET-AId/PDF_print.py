@@ -2,8 +2,6 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.graphics import renderPDF
 from Visualisering import Barchart
-# from reportlab.lib import colors
-
 
 CPET_data = {
     "Kardiel":45,
@@ -25,12 +23,12 @@ def repport(filename, title=None, barchart = None, filepath = None, R_value = No
     from reportlab.lib import colors
     from reportlab.graphics.shapes import Drawing
 
-    Max_width, Max_hight = A4 #dette vil svare til øverst højre hjørne af PDF'en, hvor 0,0 er nederst venstre hjørne
     c = canvas.Canvas(filename +".pdf")
 
     if title is None:
         title=filename
         
+    Max_width, Max_hight = A4 #dette vil svare til øverst højre hjørne af PDF'en, hvor 0,0 er nederst venstre hjørne
     margin_x = Max_width*0.1
     margin_y = Max_hight*0.1
     x = margin_x
