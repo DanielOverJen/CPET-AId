@@ -39,8 +39,16 @@ def post_processing(Peak_R, pre_processed_data):
     # Sørg for korrekt shape (2D)
     reshaped_data = np.array(pre_processed_data).reshape(1, -1)
 
+    #Vi henter lige halvdelen af træningsdataet for at kunne få nogle globale basevalues
+    idx = np.random.choice(HentCSV.X_train.shape[0], 88, replace=False)
+    ChosenFeatures = [11, 17, 42, 7, 35, 36]
+    X_background = HentCSV.X_train[idx][:, ChosenFeatures]
+
+
     # Laver SHAP explainer
-    explainer = shap.TreeExplainer(CPETAIdModel)
+    explainer = shap.TreeExplainer(CPETAIdModel, X_background) 
+    #Laver global base shap value
+    global_base_value = np.mean(explainer.expected_value)
 
     # Beregner SHAP værdier
     shap_values = explainer.shap_values(reshaped_data)
