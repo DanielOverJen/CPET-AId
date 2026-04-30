@@ -35,7 +35,7 @@ def choose_directory():
         print("Valgt patient:", chosen_patient) # Til debug
         print(patient_data) # Til debug
 
-        CPET_AId.CPET_AId(patient_data) # Kalder CPET AId med den valgte patients data
+        CPET_AId.CPET_AId(patient_data, file_path) # Kalder CPET AId med den valgte patients data
 
 # --- GUI til eksport knap og valg af patient --- #
 root = tk.Tk()
