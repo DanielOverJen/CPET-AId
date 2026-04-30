@@ -4,7 +4,7 @@ import Post_processering
 import Visualization
 import PDF_print
 
-def CPET_AId(data):
+def CPET_AId(data, filepath):
     peak_R = data[0]
     pre_processed_data = data[1:]
     
@@ -18,9 +18,9 @@ def CPET_AId(data):
                 
         barchart = Visualization(CPET_AId_proba)
         
-        PDF_print.repport("CPET AId",
-                          "CPET AId resultat",
+        PDF_print.repport("CPET AId resultat",
+                          filename=filepath,
                           barchart= barchart,
                           R_validation= R_validation)
     else:
-        PDF_print.PDF_error()
+        PDF_print.PDF_error(filepath)

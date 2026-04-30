@@ -23,7 +23,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
     from reportlab.lib import colors
     from reportlab.graphics.shapes import Drawing
 
-    c = canvas.Canvas(filename +".pdf") # opdatere så den stemmer overens med GUI fra Main
+    c = canvas.Canvas(filename) # opdatere så den stemmer overens med GUI fra Main
 
     if title is None:
         title=filename
@@ -92,7 +92,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
     c.save()
 
 
-def PDF_error():
+def PDF_error(filepath):
     from reportlab.pdfgen import canvas
     from reportlab.lib import colors
     from reportlab.lib.pagesizes import A4
@@ -103,7 +103,7 @@ def PDF_error():
     x = margin_x
     y = Max_hight - margin_y
 
-    c = canvas.Canvas("CPET AId error.pdf")
+    c = canvas.Canvas(filepath)
     c.setFillColor(colors.HexColor("#48474e"))
     c.drawString(225,810,"CPET AId kan tage fejl")
     c.drawString(225,790,"Nøjagtighed: X%")
