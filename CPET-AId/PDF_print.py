@@ -17,7 +17,7 @@ table_data = [
     ["Rask", CPET_data["Rask"]]
     ]
 
-def repport(filename, title=None, barchart = None, filepath = None, R_value = None):
+def repport(filename, title=None, barchart = None, filepath = None, R_validation=False):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
     from reportlab.lib import colors
@@ -49,8 +49,8 @@ def repport(filename, title=None, barchart = None, filepath = None, R_value = No
     c.setLineWidth(2)
     c.line(x, y - 12, Max_width - margin_x, y - 12)
 
-    if R_value < 1.1:
-        R_text = "Maksimal ydeevne muligvis ikke opnået: R < " + str(R_value)
+    if R_validation is not True:
+        R_text = "Maksimal ydeevne muligvis ikke opnået: R < 1,1"
         x = 200
         y_text = y - 30
         padding_x = 4
@@ -70,10 +70,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_value = No
         c.drawString(
             x + padding_x,
             y_text,
-            R_text
-        )
-
-
+            R_text)
 
     drawing = Drawing(350, 200)
     drawing.add(barchart)
@@ -120,9 +117,9 @@ def PDF_error():
     c.line(x, y - 12, Max_width - margin_x, y - 12)
 
     error_messagge = c.beginText()
-    error_messagge.setTextOrigin(margin_x+50,400)
-    error_messagge.setFont("Helvetica-Bold",26)
-    error_messagge.textLine("SKRIV en ERROR_massage")
+    error_messagge.setTextOrigin(margin_x+75,475)
+    error_messagge.setFont("Helvetica-Bold",15)
+    error_messagge.textLines("CPET AId kunne ikke udregne en sandsynlighed,\n grundt manglende værdier.")
     
     c.drawText(error_messagge)
     c.save()
@@ -130,7 +127,7 @@ def PDF_error():
 repport("CPET AId","CPET AId Resultat",
         barchart=Barchart(CPET_data),
         filepath="CPET-AId/Beslutningsplot_eksempel.png",
-        R_value=1.2)#kun til debugging
+        R_validation=False)#kun til debugging
 
 PDF_error()
 
