@@ -2,12 +2,20 @@ import shap
 import os
 import numpy as np
 from xgboost import XGBClassifier
+from Model_selection import HentCSV
+
+# HUSK at lave CPET AId.py om, så den har rigtige in og outputs (kan gøres i main branch)
 
 def post_processing(Peak_R, pre_processed_data):
+    """A function to validate whether the patient was at maximal capacity during exercise (R>=1,1), 
+    and calculates, shap- and baseline values for the decisionplot in Visualisation.
+    Returns: R-validation, feature_names_values, shap_values, base_values (in that order) """
 
     # --- R-VALIDERING --- #
 
     R_validation = Peak_R >= 1.1
+
+    # --- SHAP ---#
 
     # Loader ML-modellen
     CPETAIdModel = XGBClassifier()
@@ -47,7 +55,7 @@ def post_processing(Peak_R, pre_processed_data):
     # Beregner base values, som skal bruges i decision-plottet
     base_values = [float(x) for x in explainer.expected_value]
 
-    return R_validation, feature_names_values, shap_values, base_values
+    return R_validation, feature_names_values, shap_values, base_values, global_base_value
 
 #Test af funktionen:
 # data = [85.0, 60.0, 1.2, 0.15, 90.0, 1.8]
