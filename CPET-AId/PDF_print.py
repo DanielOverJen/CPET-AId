@@ -1,6 +1,5 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
-from reportlab.graphics.shapes import Drawing
 from reportlab.graphics import renderPDF
 from Visualisering import Barchart
 # from reportlab.lib import colors
@@ -20,18 +19,10 @@ table_data = [
     ["Rask", CPET_data["Rask"]]
     ]
 
-text = [("Dette er en længere tekst som automatisk bliver wrapped inde i boksen." \
-" Det er meget nemmere end textobject." \
-"Og dette er en ny linje",50 ,parametre ,1),("tekst2",45, parametre,0),("tekst3",40,parametre,0),("tekst4",35,parametre,0)] 
-
-
-def PDF_print(filename, title=None, barchart = None, text = None):
+def repport(filename, title=None, barchart = None, filepath = None, R_value = None):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
-      3.input data for the table, 4.input data for the barchart"""
-    # from reportlab.graphics.shapes import Line
+      3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
     from reportlab.lib import colors
-    from reportlab.lib.styles import getSampleStyleSheet
-    from reportlab.platypus import Paragraph
     from reportlab.graphics.shapes import Drawing
 
     Max_width, Max_hight = A4 #dette vil svare til øverst højre hjørne af PDF'en, hvor 0,0 er nederst venstre hjørne
@@ -45,52 +36,106 @@ def PDF_print(filename, title=None, barchart = None, text = None):
     x = margin_x
     y = Max_hight - margin_y
 
+    c.setFillColor(colors.HexColor("#48474e"))
+    c.drawString(225,810,"CPET AId kan tage fejl")
+    c.drawString(225,790,"Nøjagtighed: X%")
+    
+    
+    c.setFillColor("black")
     c.setTitle(title)
-    c.setFont("Times-Roman",26)
+    c.setFont("Helvetica",26) #font for title 
     c.drawString(x,y,title)
     
+
     c.setStrokeColor(colors.HexColor("#211a52"))
     c.setLineWidth(2)
     c.line(x, y - 12, Max_width - margin_x, y - 12)
 
-    highest_proba = [t[3] for t in text]
-    max_index = highest_proba.index(1)
-    
-    boxes = [
-            (50,300),
-            (50,50),
-            (350,300),
-            (350,50)
-            ]
+    if R_value < 1.1:
+        R_text = "Maksimal ydeevne muligvis ikke opnået: R < " + str(R_value)
+        x = 200
+        y_text = y - 30
+        padding_x = 4
+        padding_y = 2
+        text_width = c.stringWidth(R_text, "Helvetica-Bold", 10)
+        c.setFillColor(colors.red)
+        c.rect(
+            x,
+            y_text - padding_y,
+            text_width + 2 * padding_x,
+            10 + 4,
+            stroke=0,
+            fill=1
+        )
+        c.setFillColor(colors.black)
+        c.setFont("Helvetica-Bold", 10)
+        c.drawString(
+            x + padding_x,
+            y_text,
+            R_text
+        )
 
-    for i, (x, y) in enumerate(boxes):
-        if i == max_index:
-        c.setFillColor(colors.HexColor("#211A52"))
-    else:
-        c.setFillColor(colors.lightgrey)
-    
-    c.setStrokeColor(colors.black)
-    
-    c.rect(50,300,200,200,stroke=1,fill=1)
-    c.rect(50,50,200,200,stroke=1,fill=1)
-    c.rect(350,300,200,200,stroke=1,fill=1)
-    c.rect(350,50,200,200,stroke=1,fill=1)
 
-    styles = getSampleStyleSheet()
-    style = styles["Normal"]
-    
-    p = Paragraph(text[0], style)
 
-    p.wrapOn(c,250-2*10,120-2*10)
-    p.drawOn(c, 50+10,250+10)
-    #alle elementer om rect kan godt laves om til en funktion
-
-    drawing = Drawing(400, 220)
+    drawing = Drawing(350, 200)
     drawing.add(barchart)
-    renderPDF.draw(drawing,c,x+50,y-200)
+    renderPDF.draw(drawing,c,100,525) #placering af barchart
     
+    c.drawImage(
+        filepath,
+        50,
+        50,
+        height=500,
+        width=500,
+        preserveAspectRatio=True
+    )
+    c.setFontSize(7)
+    c.setFillColor(colors.HexColor("#48474e"))
+    c.drawString(100,margin_y+10,"De ovennævnte parametre er vægtet på baggrund af deres similaritet med tilsvarende patienter med de fire indikationer,")
+    c.drawString(100,margin_y,"og relaterer sig dermed ikke til de fysiologiske normalområder.")
+
     c.save()
 
-barchart = Barchart(CPET_data)#kun til debugging 
 
-PDF_print("CPET AId","CPET AId Resultat",barchart,text_1)#kun til debugging
+def PDF_error():
+    from reportlab.lib import colors
+    from reportlab.graphics.shapes import Drawing
+
+    Max_width, Max_hight = A4
+    margin_x = Max_width*0.1
+    margin_y = Max_hight*0.1
+    x = margin_x
+    y = Max_hight - margin_y
+
+    c = canvas.Canvas("CPET AId error.pdf")
+    c.setFillColor(colors.HexColor("#48474e"))
+    c.drawString(225,810,"CPET AId kan tage fejl")
+    c.drawString(225,790,"Nøjagtighed: X%")
+
+    title="CPET AId error"
+    c.setFillColor("black")
+    c.setTitle(title)
+    c.setFont("Helvetica",26) #font for title 
+    c.drawString(x,y,title)
+    c.setStrokeColor(colors.HexColor("#211a52"))
+    c.setLineWidth(2)
+    c.line(x, y - 12, Max_width - margin_x, y - 12)
+
+    error_messagge = c.beginText()
+    error_messagge.setTextOrigin(margin_x+50,400)
+    error_messagge.setFont("Helvetica-Bold",26)
+    error_messagge.textLine("SKRIV en ERROR_massage")
+    
+    c.drawText(error_messagge)
+    c.save()
+
+repport("CPET AId","CPET AId Resultat",
+        barchart=Barchart(CPET_data),
+        filepath="CPET-AId/Beslutningsplot_eksempel.png",
+        R_value=1.2)#kun til debugging
+
+PDF_error()
+
+
+    
+
