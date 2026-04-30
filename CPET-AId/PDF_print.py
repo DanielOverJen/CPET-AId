@@ -23,7 +23,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
     from reportlab.lib import colors
     from reportlab.graphics.shapes import Drawing
 
-    c = canvas.Canvas(filename +".pdf")
+    c = canvas.Canvas(filename +".pdf") # opdatere så den stemmer overens med GUI fra Main
 
     if title is None:
         title=filename
