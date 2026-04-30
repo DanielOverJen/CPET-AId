@@ -1,6 +1,8 @@
 import Datavalidering
 import ML_model
 import Post_processering
+import Visualization
+import PDF_print
 
 def CPET_AId(data):
     peak_R = data[0]
@@ -16,6 +18,9 @@ def CPET_AId(data):
                 
         barchart = Visualization(CPET_AId_proba)
         
-        PDF_print(barchart, cardiac_post_processed, pulmo_post_processed, musco_post_processed, healthy_post_processed, R_validation)
+        PDF_print.repport("CPET AId",
+                          "CPET AId resultat",
+                          barchart= barchart,
+                          R_validation= R_validation)
     else:
-        PDF_print_error()
+        PDF_print.PDF_error()

@@ -93,8 +93,9 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
 
 
 def PDF_error():
+    from reportlab.pdfgen import canvas
     from reportlab.lib import colors
-    from reportlab.graphics.shapes import Drawing
+    from reportlab.lib.pagesizes import A4
 
     Max_width, Max_hight = A4
     margin_x = Max_width*0.1
