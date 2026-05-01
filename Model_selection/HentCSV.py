@@ -1,9 +1,14 @@
 import numpy as np 
 import pandas as pd
+import os
 
 ####Hent af data ####
 
-df = pd.read_csv("CPET-AId/Model selection/CPET_ProcessedDataMed154Rykket.csv")
+current_dir = os.path.dirname(__file__)
+
+file_path = os.path.join(current_dir, "CPET_ProcessedDataMed154Rykket.csv")
+
+df = pd.read_csv(file_path)
 
 
 df = df.iloc[:,3:] #Fjerner de 2 første søjler med patient ID og køn. Iloc gør at alle rækker starter fra søjle 3 og frem 
