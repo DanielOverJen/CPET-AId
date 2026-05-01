@@ -29,17 +29,17 @@ def Barchart(data):
     bar_chart.barLabels.nudge = 10
     bar_chart.barLabels.fontSize = 12
     bar_chart.barLabelFormat = '%.1f%%'
-    bar_chart.barLabels.fontName = "Helvetica-Bold"
+    bar_chart.barLabels.fontName = "Arial-Bold"
     bar_chart.barLabels.fillColor = colors.black
 
-    bar_chart.categoryAxis.labels.fontName = "Helvetica"
+    bar_chart.categoryAxis.labels.fontName = "Arial"
     bar_chart.categoryAxis.categoryNames = [
         'Kardiel:',
         'Pulmonal:',
         'Muskulært:',
         'Rask:'
     ]
-    bar_chart.valueAxis.labels.fontName = "Helvetica"
+    bar_chart.valueAxis.labels.fontName = "Arial"
     bar_chart.valueAxis.valueMin = 0
     bar_chart.valueAxis.valueMax = 100
     bar_chart.valueAxis.valueStep = 10

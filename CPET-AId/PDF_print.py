@@ -1,20 +1,4 @@
-from Visualisering import Barchart
-
-# CPET_data = {
-#     "Kardiel":45,
-#     "Pulmonal":45,
-#     "Muskulært": 27,
-#     "Rask":5
-#     }
-# table_data = [
-#     ["Fysiologisk system","Sandsynlighed [%]"],
-#     ["Kardiel", CPET_data["Kardiel"]],
-#     ["Pulmonal", CPET_data["Pulmonal"]],
-#     ["Muskulært", CPET_data["Muskulært"]],
-#     ["Rask", CPET_data["Rask"]]
-#     ]
-
-def repport(filename, title=None, barchart = None, filepath = None, R_validation=False):
+def repport(filename, title=None, barchart = None, filepath_for_png = None, R_validation=False):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
     from reportlab.pdfgen import canvas
@@ -41,7 +25,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
     
     c.setFillColor("black")
     c.setTitle(title)
-    c.setFont("Helvetica",26) #font for title 
+    c.setFont("Arial",26) #font for title 
     c.drawString(x,y,title)
     
 
@@ -55,7 +39,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
         y_text = y - 30
         padding_x = 4
         padding_y = 2
-        text_width = c.stringWidth(R_text, "Helvetica-Bold", 10)
+        text_width = c.stringWidth(R_text, "Arial-Bold", 10)
         c.setFillColor(colors.red)
         c.rect(
             x,
@@ -66,7 +50,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
             fill=1
         )
         c.setFillColor(colors.black)
-        c.setFont("Helvetica-Bold", 10)
+        c.setFont("Arial-Bold", 10)
         c.drawString(
             x + padding_x,
             y_text,
@@ -77,7 +61,7 @@ def repport(filename, title=None, barchart = None, filepath = None, R_validation
     renderPDF.draw(drawing,c,100,525) #placering af barchart
     
     c.drawImage(
-        filepath,
+        filepath_for_png,
         50,
         50,
         height=500,
@@ -111,7 +95,7 @@ def PDF_error(filepath):
     title="CPET AId error"
     c.setFillColor("black")
     c.setTitle(title)
-    c.setFont("Helvetica",26) #font for title 
+    c.setFont("Arial",26) #font for title 
     c.drawString(x,y,title)
     c.setStrokeColor(colors.HexColor("#211a52"))
     c.setLineWidth(2)
@@ -119,18 +103,11 @@ def PDF_error(filepath):
 
     error_messagge = c.beginText()
     error_messagge.setTextOrigin(margin_x+75,475)
-    error_messagge.setFont("Helvetica-Bold",15)
+    error_messagge.setFont("Arial-Bold",15)
     error_messagge.textLines("CPET AId kunne ikke udregne en sandsynlighed,\n grundt manglende værdier.")
     
     c.drawText(error_messagge)
     c.save()
-
-# repport("CPET AId","CPET AId Resultat",
-#         barchart=Barchart(CPET_data),
-#         filepath="CPET-AId/Beslutningsplot_eksempel.png",
-#         R_validation=False)#kun til debugging
-
-# PDF_error()
 
 
     
