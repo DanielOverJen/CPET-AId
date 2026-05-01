@@ -221,20 +221,20 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values, gl
 
     ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = 'lower right')
     
-    # plt.savefig("CPET-AId/CPET-AId/decisionplot.png", bbox_inches="tight")
-    plt.show()
+    plt.savefig("CPET-AId/CPET-AId/decisionplot.png", bbox_inches="tight")
+    # plt.show()
 
 
-#Test af kode 
+# #Test af kode 
 
-peak_R = 1.081632653
+# peak_R = 1.081632653
 
-pre_processed_data = [0.668427, 1004.5, 1.416444, 2.031264, 0.754807, 0.177091]
+# pre_processed_data = [0.668427, 1004.5, 1.416444, 2.031264, 0.754807, 0.177091]
 
 
-R_validation, feature_names_values, shap_values, base_values, global_base_values = Post_processering.post_processing(peak_R, pre_processed_data)
+# R_validation, feature_names_values, shap_values, base_values = Post_processering.post_processing(peak_R, pre_processed_data)
 
-Class_proba = ML_model.classify(pre_processed_data)
+# Class_proba = ML_model.classify(pre_processed_data)
 
-decisionplot(Class_proba, feature_names_values, shap_values, base_values, global_base_values)
+# decisionplot(Class_proba, feature_names_values, shap_values, base_values)
 
