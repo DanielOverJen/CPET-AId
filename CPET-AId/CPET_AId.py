@@ -12,11 +12,11 @@ def CPET_AId(data, filepath):
         CPET_AId_proba = ML_model.classify(pre_processed_data)
         # eksempel på CPET_AId_proba[("fys_name", probability),x4]
         
-        R_validation, feature_names_values, shap_values, base_values, global_base_values = Post_processering.post_processing(peak_R, pre_processed_data) 
-        
+        R_validation, feature_names_values, shap_values, base_values = Post_processering.post_processing(peak_R, pre_processed_data) 
+
                 
         barchart = Visualisering.Barchart(CPET_AId_proba)
-        Visualisering.decisionplot(CPET_AId_proba, feature_names_values, shap_values, base_values, global_base_values)
+        Visualisering.decisionplot(CPET_AId_proba, feature_names_values, shap_values, base_values)
 
         
         PDF_print.repport(title="CPET AId resultat",
