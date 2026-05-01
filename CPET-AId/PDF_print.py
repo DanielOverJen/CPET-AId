@@ -1,3 +1,5 @@
+
+
 def repport(filename, title=None, barchart = None, filepath_for_png = None, R_validation=False):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
@@ -109,6 +111,4 @@ def PDF_error(filepath):
     c.drawText(error_messagge)
     c.save()
 
-
-    
 
