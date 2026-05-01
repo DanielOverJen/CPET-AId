@@ -12,8 +12,7 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     from reportlab.pdfbase import pdfmetrics
 
 
-    pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))
-    
+    pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))    
     pdfmetrics.registerFont(TTFont('Arial-Bold','C:/Windows/Fonts/arialbd.ttf'))
 
     c = canvas.Canvas(filename) # opdatere så den stemmer overens med GUI fra Main
@@ -83,7 +82,6 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     c.drawString(100,margin_y,"og relaterer sig dermed ikke til de fysiologiske normalområder.")
 
     c.save()
-
 
 def PDF_error(filepath):
     from reportlab.pdfgen import canvas
