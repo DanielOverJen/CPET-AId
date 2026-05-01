@@ -17,7 +17,7 @@ def post_processing(Peak_R, pre_processed_data):
 
     # --- R-VALIDERING --- #
 
-    R_validation = Peak_R >= 1.1
+    R_validation = bool(Peak_R >= 1.1)
 
     # --- SHAP ---#
 

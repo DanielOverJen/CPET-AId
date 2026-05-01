@@ -1,6 +1,6 @@
 
 
-def repport(filename, title=None, barchart = None, filepath_for_png = None, R_validation=False):
+def report(filename, R_valid=False, title=None, barchart = None, filepath_for_png = None):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
     from reportlab.pdfgen import canvas
@@ -29,7 +29,7 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
 
     c.setFillColor(colors.HexColor("#48474e"))
     c.drawString(225,810,"CPET AId kan tage fejl")
-    c.drawString(225,790,"Nøjagtighed: X%")
+    c.drawString(225,790,"Nøjagtighed: 75%")
     
     
     c.setFillColor("black")
@@ -40,9 +40,9 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
 
     c.setStrokeColor(colors.HexColor("#211a52"))
     c.setLineWidth(2)
-    c.line(x, y - 12, Max_width - margin_x, y - 12)
+    c.line(x-10, y - 12, Max_width - margin_x+10, y - 12)
 
-    if R_validation is not True:
+    if R_valid is not True:
         R_text = "Maksimal ydeevne muligvis ikke opnået: R < 1,1"
         x = 200
         y_text = y - 30
@@ -65,7 +65,7 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
             y_text,
             R_text)
 
-    drawing = Drawing(350, 200)
+    drawing = Drawing(450, 200)
     drawing.add(barchart)
     renderPDF.draw(drawing,c,100,525) #placering af barchart
     

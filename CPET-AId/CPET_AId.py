@@ -14,14 +14,13 @@ def CPET_AId(data, filepath):
         
         R_validation, feature_names_values, shap_values, base_values = Post_processering.post_processing(peak_R, pre_processed_data) 
 
-                
         barchart = Visualisering.Barchart(CPET_AId_proba)
         Visualisering.decisionplot(CPET_AId_proba, feature_names_values, shap_values, base_values)
 
         
-        PDF_print.repport(title="CPET AId resultat",
+        PDF_print.report(title="CPET AId resultat",
                           filename=filepath,
                           barchart= barchart,
-                          R_validation= R_validation, filepath_for_png="CPET-AId/CPET-AId/decisionplot.png")
+                          R_valid= R_validation, filepath_for_png="CPET-AId/CPET-AId/decisionplot.png")
     else:
         PDF_print.PDF_error(filepath)

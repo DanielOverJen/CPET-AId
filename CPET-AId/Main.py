@@ -33,8 +33,8 @@ def choose_directory():
     if file_path:
         patient_data = Vyntus_data[chosen_patient]
         
-        print("Valgt patient:", chosen_patient) # Til debug
-        print(patient_data) # Til debug
+        # print("Valgt patient:", chosen_patient) # Til debug
+        # print(patient_data) # Til debug
 
         CPET_AId.CPET_AId(patient_data, file_path) # Kalder CPET AId med den valgte patients data
 

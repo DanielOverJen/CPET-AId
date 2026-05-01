@@ -9,7 +9,7 @@ def Barchart(data):
     bar_chart = VerticalBarChart()
     bar_chart.x = 50
     bar_chart.y = 50
-    bar_chart.width = 300
+    bar_chart.width = 450
     bar_chart.height = 125
 
     # values = [
@@ -40,8 +40,8 @@ def Barchart(data):
 
     bar_chart.categoryAxis.labels.fontName = "Arial"
     bar_chart.categoryAxis.categoryNames = [
-        'Kardiel:',
-        'Pulmonal:',
+        'Kardielt:',
+        'Pulmonalt:',
         'Muskulært:',
         'Rask:'
     ]
