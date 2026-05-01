@@ -74,7 +74,7 @@ def Draw_table(data):
     )
     return table
 
-def decisionplot(Class_proba, feature_names_values, shap_values, base_values, global_base_values):
+def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     """Gemmer et png af et decisionplot med det højest sandsynlige fysiologisk system markeret"""
     name, proba = zip(*Class_proba) #Deler input sandsynligheder op i 2 arrays
     
