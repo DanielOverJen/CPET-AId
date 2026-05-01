@@ -1,7 +1,11 @@
 import shap
 import os
+import sys
 import numpy as np
 from xgboost import XGBClassifier
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 from Model_selection import HentCSV
 
 # HUSK at lave CPET AId.py om, så den har rigtige in og outputs (kan gøres i main branch)
@@ -28,12 +32,12 @@ def post_processing(Peak_R, pre_processed_data):
 
     # Array med ML-modellens feature-navne og de tilhørende værdier
     feature_names_values = [
-            f"Procentmæssig afvigelse fra forventet Peak VO2 \n = {pre_processed_data[0]} %",
+            f"Afvigelse fra forventet Peak VO2 \n = {pre_processed_data[0]} %",
             f"Peak minutventilation (VE) \n = {pre_processed_data[1]} L/min",
-            f"Hældningen af O2-pulsen i testens første halvdel \n = {pre_processed_data[2]}",
+            f"Hældningen af O2-pulsen i testens \n første halvdel = {pre_processed_data[2]}",
             f"Spredningen af VE/VCO2 \n = {pre_processed_data[3]}",
-            f"Procentmæssig afvigelse fra forventet Peak O2-puls \n = {pre_processed_data[4]} %",
-            f"Hældningen af VO2 i testens første halvdel \n = {pre_processed_data[5]}"
+            f"Afvigelse fra forventet Peak O2-puls \n = {pre_processed_data[4]} %",
+            f"Hældningen af VO2 i testens \n første halvdel = {pre_processed_data[5]}"
         ]
     
     # Sørg for korrekt shape (2D)
