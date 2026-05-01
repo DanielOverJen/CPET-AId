@@ -1,5 +1,3 @@
-
-
 def repport(filename, title=None, barchart = None, filepath_for_png = None, R_validation=False):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
@@ -12,8 +10,7 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
     from reportlab.pdfbase import pdfmetrics
 
 
-    pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))
-    
+    pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))    
     pdfmetrics.registerFont(TTFont('Arial-Bold','C:/Windows/Fonts/arialbd.ttf'))
 
     c = canvas.Canvas(filename) # opdatere så den stemmer overens med GUI fra Main
@@ -40,7 +37,7 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
 
     c.setStrokeColor(colors.HexColor("#211a52"))
     c.setLineWidth(2)
-    c.line(x, y - 12, Max_width - margin_x, y - 12)
+    c.line(x, y - 10, Max_width - margin_x, y - 10)
 
     if R_validation is not True:
         R_text = "Maksimal ydeevne muligvis ikke opnået: R < 1,1"
@@ -83,7 +80,6 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
     c.drawString(100,margin_y,"og relaterer sig dermed ikke til de fysiologiske normalområder.")
 
     c.save()
-
 
 def PDF_error(filepath):
     from reportlab.pdfgen import canvas
