@@ -1,7 +1,7 @@
 import Datavalidering
 import ML_model
 import Post_processering
-import Visualization
+import Visualisering
 import PDF_print
 
 def CPET_AId(data, filepath):
@@ -16,11 +16,13 @@ def CPET_AId(data, filepath):
         # eksempel på et af disse array: cardiac_post_processed = {["Kardielt:", 50%, parameters[], Highest_value]}
         # parameters[(VO2_name,VO2_value),("PVO2",10%)]
                 
-        barchart = Visualization(CPET_AId_proba)
+        barchart = Visualisering.Barchart(CPET_AId_proba)
+        Visualisering.decisionplot(CPET_AId_proba, feature_names_values, shap_values, base_values, global_base_values)
+
         
         PDF_print.repport("CPET AId resultat",
                           filename=filepath,
                           barchart= barchart,
-                          R_validation= R_validation)
+                          R_validation= R_validation, filepath_for_png="CPET-AId/CPET-AId/decisionplot.png")
     else:
         PDF_print.PDF_error(filepath)
