@@ -1,18 +1,4 @@
-from Visualisering import Barchart
 
-# CPET_data = {
-#     "Kardiel":45,
-#     "Pulmonal":45,
-#     "Muskulært": 27,
-#     "Rask":5
-#     }
-# table_data = [
-#     ["Fysiologisk system","Sandsynlighed [%]"],
-#     ["Kardiel", CPET_data["Kardiel"]],
-#     ["Pulmonal", CPET_data["Pulmonal"]],
-#     ["Muskulært", CPET_data["Muskulært"]],
-#     ["Rask", CPET_data["Rask"]]
-#     ]
 
 def repport(filename, title=None, barchart = None, filepath = None, R_validation=False):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
@@ -125,13 +111,5 @@ def PDF_error(filepath):
     c.drawText(error_messagge)
     c.save()
 
-# repport("CPET AId","CPET AId Resultat",
-#         barchart=Barchart(CPET_data),
-#         filepath="CPET-AId/Beslutningsplot_eksempel.png",
-#         R_validation=False)#kun til debugging
 
-# PDF_error()
-
-
-    
 
