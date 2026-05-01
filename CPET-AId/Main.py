@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import ttk
-from reportlab.platypus import SimpleDocTemplate, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
+# from reportlab.platypus import SimpleDocTemplate, Paragraph
+# from reportlab.lib.styles import getSampleStyleSheet
 import sys
 import os
 
@@ -29,6 +29,7 @@ def choose_directory():
         title="Hvilken mappe vil du gemme rapporten i?"
     )
     
+
     if file_path:
         patient_data = Vyntus_data[chosen_patient]
         

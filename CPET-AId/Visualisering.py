@@ -12,12 +12,15 @@ def Barchart(data):
     bar_chart.width = 300
     bar_chart.height = 125
 
-    values = [
-        data["Kardiel"],
-        data["Pulmonal"],
-        data["Muskulært"],
-        data["Rask"]
-    ]
+    # values = [
+    #     data["Kardiel"],
+    #     data["Pulmonal"],
+    #     data["Muskulært"],
+    #     data["Rask"]
+    # ]
+    
+    name, values = zip(*data) #Deler input sandsynligheder op i 2 arrays
+    
 
     bar_chart.data = [values]
 
@@ -121,7 +124,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values, gl
 
     BaseValueLine = ax.lines[0] #Grå lodret basevalue linje 
     BaseValueLine.set_visible(False)
-
+    
     CardiacLine = ax.lines[6]
     CardiacLine.set_linestyle('dashdot')
     if max_index == 0 :

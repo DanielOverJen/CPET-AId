@@ -8,6 +8,13 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
     from reportlab.graphics import renderPDF
     from reportlab.lib import colors
     from reportlab.graphics.shapes import Drawing
+    from reportlab.pdfbase.ttfonts import TTFont
+    from reportlab.pdfbase import pdfmetrics
+
+
+    pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))
+    
+    pdfmetrics.registerFont(TTFont('Arial-Bold','C:/Windows/Fonts/arialbd.ttf'))
 
     c = canvas.Canvas(filename) # opdatere så den stemmer overens med GUI fra Main
 
@@ -27,7 +34,7 @@ def repport(filename, title=None, barchart = None, filepath_for_png = None, R_va
     
     c.setFillColor("black")
     c.setTitle(title)
-    c.setFont("Arial",26) #font for title 
+    c.setFont('Arial',26) #font for title 
     c.drawString(x,y,title)
     
 
