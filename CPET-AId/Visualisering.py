@@ -125,12 +125,18 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     BaseValueLine = ax.lines[0] #Grå lodret basevalue linje 
     BaseValueLine.set_visible(False)
     
+    #Vandrette feature linjer
+    width = 1
+    ax.lines[1].set_linewidth(width)
+    ax.lines[2].set_linewidth(width)
+    ax.lines[3].set_linewidth(width)
+    ax.lines[4].set_linewidth(width)
+    ax.lines[5].set_linewidth(width)
+
+    #Klassifikationslinjer
     CardiacLine = ax.lines[6]
     CardiacLine.set_linestyle('dashdot')
-    if max_index == 0 :
-        CardiacLine.set_linewidth(5)
-    else :
-        CardiacLine.set_linewidth(2)
+    CardiacLine.set_linewidth(2)
     CardiacX = CardiacLine.get_xdata()
     CardiacY = CardiacLine.get_ydata()
 
@@ -151,10 +157,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
 
     PulmoLine = ax.lines[7]
     PulmoLine.set_linestyle('dashed')
-    if max_index == 1 :
-        PulmoLine.set_linewidth(5)
-    else :
-        PulmoLine.set_linewidth(2)
+    PulmoLine.set_linewidth(2)
     
     PulmoX = PulmoLine.get_xdata()
     PulmoY = PulmoLine.get_ydata()
@@ -173,11 +176,8 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     )
 
     MuscoLine = ax.lines[8]
-    MuscoLine.set_linestyle('dotted')
-    if max_index == 2 :
-        MuscoLine.set_linewidth(5)
-    else :
-        MuscoLine.set_linewidth(2)
+    MuscoLine.set_linestyle('dotted')    
+    MuscoLine.set_linewidth(2)
     MuscoX = MuscoLine.get_xdata()
     MuscoY = MuscoLine.get_ydata()
 
@@ -198,10 +198,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
 
     HealthyLine = ax.lines[9]
     HealthyLine.set_linestyle('solid')
-    if max_index == 3 :
-        HealthyLine.set_linewidth(5)
-    else :
-        HealthyLine.set_linewidth(2)
+    HealthyLine.set_linewidth(2)
     HealthyX = HealthyLine.get_xdata()
     HealthyY = HealthyLine.get_ydata()
 
