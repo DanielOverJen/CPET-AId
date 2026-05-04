@@ -1,4 +1,4 @@
-
+# from Visualisering import Barchart
 
 def report(filename, R_valid=False, title=None, barchart = None, filepath_for_png = None):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
@@ -10,6 +10,10 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     from reportlab.graphics.shapes import Drawing
     from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.pdfbase import pdfmetrics
+    from reportlab.platypus import Paragraph
+    from reportlab.lib.styles import getSampleStyleSheet
+
+    styles = getSampleStyleSheet()
 
 
     pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))    
@@ -39,7 +43,7 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
 
     c.setStrokeColor(colors.HexColor("#211a52"))
     c.setLineWidth(2)
-    c.line(x-10, y - 12, Max_width - margin_x+10, y - 12)
+    c.line(x-10, y - 12, Max_width - margin_x + 10, y - 12)
 
     if R_valid is not True:
         R_text = "Maksimal ydeevne muligvis ikke opnået: R < 1,1"
@@ -64,24 +68,46 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
             y_text,
             R_text)
 
-    drawing = Drawing(450, 200)
+    drawing = Drawing(400, 200)
     drawing.add(barchart)
-    renderPDF.draw(drawing,c,100,525) #placering af barchart
+    x_centered = (Max_width-400)/2
+    renderPDF.draw(drawing,c,x_centered,505) #placering af barchart
     
+    # x_centered_img = Max_width/2-500
+
     c.drawImage(
         filepath_for_png,
         50,
         50,
         height=500,
         width=500,
-        preserveAspectRatio=True
+        preserveAspectRatio=True,
+        # anchor="C"
     )
-    c.setFontSize(7)
-    c.setFillColor(colors.HexColor("#48474e"))
-    c.drawString(100,margin_y+10,"De ovennævnte parametre er vægtet på baggrund af deres similaritet med tilsvarende patienter med de fire indikationer,")
-    c.drawString(100,margin_y,"og relaterer sig dermed ikke til de fysiologiske normalområder.")
+
+    text = """Et søjlediagram hvor sandsynlighederne for det pågældende fysiologiske system er det begrænsende for patienten."""
+    
+    p = Paragraph(text, styles["Normal"])
+    p.wrap(400,200)
+    p.drawOn(c,100,margin_y+375)
+
+    text2 = """Et beslutningsplot, der viser udviklingen af CPET AIds beslutning i takt med hver parametre har sin indvirkning.
+     De ovennævnte parametre er vægtet på baggrund af deres similaritet med tilsvarende patienter med de fire indikationer, og relaterer sig dermed ikke til de fysiologiske normalområder"""
+    
+    p2 = Paragraph(text2, styles["Normal"])
+    p2.wrap(400, 200)
+    p2.drawOn(c, 100, margin_y+45)
+
+    # c.setFontSize(7)
+    # c.setFillColor(colors.HexColor("#48474e"))
+    # c.drawString(100,margin_y+10,"")
+    # c.drawString(100,margin_y,"")
 
     c.save()
+
+# data = (("Kardiel", 100), ("Pulmonel",60),("Muskulært", 100),("Rask",12))
+
+# report("CPET AId.pdf",R_valid=False, title="CPET AId Resultat:",barchart=Barchart(data),filepath_for_png="CPET-AId/decisionplot.png")
 
 def PDF_error(filepath):
     from reportlab.pdfgen import canvas
@@ -97,7 +123,7 @@ def PDF_error(filepath):
     c = canvas.Canvas(filepath)
     c.setFillColor(colors.HexColor("#48474e"))
     c.drawString(225,810,"CPET AId kan tage fejl")
-    c.drawString(225,790,"Nøjagtighed: X%")
+    c.drawString(225,790,"Nøjagtighed: 75%")
 
     title="CPET AId error"
     c.setFillColor("black")
