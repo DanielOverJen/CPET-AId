@@ -189,6 +189,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     HealthyLine.set_linewidth(2)
     HealthyX = HealthyLine.get_xdata()
     HealthyY = HealthyLine.get_ydata()
+    Healthycolor = HealthyLine.get_color()
 
     # slutpunktet af linjen
     x_end = HealthyX[-1]-0.03
@@ -204,7 +205,54 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
         zorder = 10
     )
 
-    ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = 'lower right')
+    mid = (xmin + xmax) / 2
+
+    # antag roden er første x-værdi i en linje
+    root_x = ax.lines[0].get_xdata()[0]
+
+    if root_x < mid:
+        location = "lower right"
+    else:
+        location = "lower left"
+
+
+
+    
+    xmin, xmax = ax.get_xlim()
+    mid = (xmin + xmax) / 2
+
+    # definér områder (justér hvis du vil)
+    left_limit = xmin + 0.65 * (mid - xmin)
+    right_limit = mid + 0.15 * (xmax - mid)
+
+    count_left = 0
+    count_right = 0
+
+    lines = ax.lines[6:9]
+    for line in lines:
+        x = line.get_xdata()
+        if len(x) > 1:
+            # brug punkt efter første feature
+            x_val = x[1]
+
+            if x_val <= left_limit:
+                count_left += 1
+            elif x_val >= right_limit:
+                count_right += 1
+
+    threshold = 1
+    # vælg side med mindst "trafik"
+    if count_left > count_right and count_left >= threshold:
+        loc = "lower right"
+    elif count_right > count_left and count_right >= threshold:
+        loc = "lower left"
+    else:
+        # hvis det er tæt → fallback
+        loc = "lower right"
+
+    location = loc
+
+    ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = location)
     
     plt.savefig("CPET-AId/CPET-AId/decisionplot.png", bbox_inches="tight")
     # plt.show()
