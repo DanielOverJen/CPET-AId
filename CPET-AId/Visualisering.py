@@ -189,7 +189,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     HealthyLine.set_linewidth(2)
     HealthyX = HealthyLine.get_xdata()
     HealthyY = HealthyLine.get_ydata()
-    Healthycolor = HealthyLine.get_color()
+    
 
     # slutpunktet af linjen
     x_end = HealthyX[-1]-0.03
@@ -205,20 +205,6 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
         zorder = 10
     )
 
-    mid = (xmin + xmax) / 2
-
-    # antag roden er første x-værdi i en linje
-    root_x = ax.lines[0].get_xdata()[0]
-
-    if root_x < mid:
-        location = "lower right"
-    else:
-        location = "lower left"
-
-
-
-    
-    xmin, xmax = ax.get_xlim()
     mid = (xmin + xmax) / 2
 
     # definér områder (justér hvis du vil)
