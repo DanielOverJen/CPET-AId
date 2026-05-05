@@ -92,11 +92,13 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     p.drawOn(c,100,margin_y+375)
 
     text2 = """Et beslutningsplot, der viser udviklingen af CPET AIds beslutning i takt med hver parametre har sin indvirkning.
-     De ovennævnte parametre er vægtet på baggrund af deres similaritet med tilsvarende patienter med de fire indikationer, og relaterer sig dermed ikke til de fysiologiske normalområder"""
+      Disse parametre bør sammenholdes med det tilhørende 9-panel plot. 
+     De ovennævnte parametre er vægtet på baggrund af deres similaritet med tilsvarende patienter med de fire indikationer,
+       og relaterer sig dermed ikke til de fysiologiske normalområder."""
     
     p2 = Paragraph(text2, styles["Normal"])
     p2.wrap(400, 200)
-    p2.drawOn(c, 100, margin_y+45)
+    p2.drawOn(c, 100, margin_y+35)
 
     # c.setFontSize(7)
     # c.setFillColor(colors.HexColor("#48474e"))
