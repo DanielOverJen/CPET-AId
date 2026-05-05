@@ -32,12 +32,12 @@ def post_processing(Peak_R, pre_processed_data):
 
     # Array med ML-modellens feature-navne og de tilhørende værdier
     feature_names_values = [
-            f"Afvigelse fra forventet Peak VO2 \n = {pre_processed_data[0]} %",
+            f"Afvigelse fra forventet Peak VO2 \n = {round(pre_processed_data[0]*100,1)} %",
             f"Peak minutventilation (VE) \n = {pre_processed_data[1]} L/min",
-            f"Hældningen af O2-pulsen i testens \n første halvdel = {pre_processed_data[2]}",
-            f"Spredningen af VE/VCO2 \n = {pre_processed_data[3]}",
-            f"Afvigelse fra forventet Peak O2-puls \n = {pre_processed_data[4]} %",
-            f"Hældningen af VO2 i testens \n første halvdel = {pre_processed_data[5]}"
+            f"Hældningen af O2-pulsen i testens \n første halvdel = {round(pre_processed_data[2],3)}",
+            f"Spredningen af VE/VCO2 \n = {round(pre_processed_data[3],2)}",
+            f"Afvigelse fra forventet Peak O2-puls \n = {round(pre_processed_data[4]*100,1)} %",
+            f"Hældningen af VO2 i testens \n første halvdel = {round(pre_processed_data[5],3)}"
         ]
     
     # Sørg for korrekt shape (2D)
