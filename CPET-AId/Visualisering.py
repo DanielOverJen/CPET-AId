@@ -7,21 +7,13 @@ def Barchart(data):
     """Skal modtage et datasæt bestående af tuple på formen ["navn":tal]"""
 
     bar_chart = VerticalBarChart()
-    bar_chart.x = 50
-    bar_chart.y = 50
-    bar_chart.width = 450
-    bar_chart.height = 125
-
-    # values = [
-    #     data["Kardiel"],
-    #     data["Pulmonal"],
-    #     data["Muskulært"],
-    #     data["Rask"]
-    # ]
+    bar_chart.x = 0
+    bar_chart.y = 0
+    bar_chart.width = 400
+    bar_chart.height = 200
     
-    name, values = zip(*data) #Deler input sandsynligheder op i 2 arrays
+    _ , values = zip(*data) #Deler input sandsynligheder op i 2 arrays
     
-
     bar_chart.data = [values]
 
     max_value = max(values)
@@ -45,19 +37,15 @@ def Barchart(data):
         'Muskulært:',
         'Rask:'
     ]
+    
     bar_chart.valueAxis.labels.fontName = "Arial"
     bar_chart.valueAxis.valueMin = 0
     bar_chart.valueAxis.valueMax = 100
     bar_chart.valueAxis.valueStep = 10
     bar_chart.valueAxis.visibleGrid = True
-    bar_chart.valueAxis.valueStep = 20
     bar_chart.valueAxis.gridStrokeColor = colors.HexColor("#dddddd")
     bar_chart.valueAxis.gridStrokeWidth = 0.5
     
-    bar_chart.x=0
-    bar_chart.y=0
-    bar_chart.width=350
-    bar_chart.height=200
     
     return bar_chart
 
