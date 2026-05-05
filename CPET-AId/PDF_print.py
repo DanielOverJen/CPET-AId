@@ -1,5 +1,3 @@
-# from Visualisering import Barchart
-
 def report(filename, R_valid=False, title=None, barchart = None, filepath_for_png = None):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
@@ -14,7 +12,6 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     from reportlab.lib.styles import getSampleStyleSheet
 
     styles = getSampleStyleSheet()
-
 
     pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))    
     pdfmetrics.registerFont(TTFont('Arial-Bold','C:/Windows/Fonts/arialbd.ttf'))
@@ -73,8 +70,6 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     x_centered = (Max_width-400)/2
     renderPDF.draw(drawing,c,x_centered,505) #placering af barchart
     
-    # x_centered_img = Max_width/2-500
-
     c.drawImage(
         filepath_for_png,
         50,
@@ -82,7 +77,6 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
         height=500,
         width=500,
         preserveAspectRatio=True,
-        # anchor="C"
     )
 
     text = """Et søjlediagram hvor sandsynlighederne for det pågældende fysiologiske system er det begrænsende for patienten."""
@@ -100,16 +94,7 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     p2.wrap(400, 200)
     p2.drawOn(c, 100, margin_y+35)
 
-    # c.setFontSize(7)
-    # c.setFillColor(colors.HexColor("#48474e"))
-    # c.drawString(100,margin_y+10,"")
-    # c.drawString(100,margin_y,"")
-
     c.save()
-
-# data = (("Kardiel", 100), ("Pulmonel",60),("Muskulært", 100),("Rask",12))
-
-# report("CPET AId.pdf",R_valid=False, title="CPET AId Resultat:",barchart=Barchart(data),filepath_for_png="CPET-AId/decisionplot.png")
 
 def PDF_error(filepath):
     from reportlab.pdfgen import canvas
