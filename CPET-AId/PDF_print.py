@@ -108,9 +108,9 @@ def PDF_error(filepath):
     y = Max_hight - margin_y
 
     c = canvas.Canvas(filepath)
-    c.setFillColor(colors.HexColor("#48474e"))
-    c.drawString(225,810,"CPET AId kan tage fejl")
-    c.drawString(225,790,"Nøjagtighed: 75%")
+    # c.setFillColor(colors.HexColor("#48474e"))
+    # c.drawString(225,810,"CPET AId kan tage fejl")
+    # c.drawString(225,790,"Nøjagtighed: 75%")
 
     title="CPET AId error"
     c.setFillColor("black")
