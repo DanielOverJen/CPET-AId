@@ -55,6 +55,12 @@ print(sample.T)
 
 np.set_printoptions(suppress=True) #Sørger lige for at printet ikke printes med videnskabelig notation e-01 f.eks.
 
+from sklearn.metrics import classification_report
+
+cr = classification_report(y_test, y_pred, target_names=HentCSV.classification_names)
+
+print(cr)
+
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
