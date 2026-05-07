@@ -4,7 +4,7 @@ from reportlab.lib import colors
 from reportlab.graphics.charts.barcharts import VerticalBarChart
 
 def Barchart(data):
-    """Skal modtage et datasæt bestående af tuple på formen ["navn":tal]"""
+    """Skal modtage et datasæt bestående af tuple på formen ("navn",tal)"""
 
     bar_chart = VerticalBarChart()
     bar_chart.x = 0
