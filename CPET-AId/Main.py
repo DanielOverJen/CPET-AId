@@ -5,6 +5,7 @@ from tkinter import ttk
 # from reportlab.lib.styles import getSampleStyleSheet
 import sys
 import os
+import numpy as np
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__))) # Til at kunne eksportere fra en anden mappe (Model_selection)
 from Model_selection import HentCSV
@@ -14,6 +15,9 @@ import CPET_AId
 
 Model_features = [14, 11, 17, 42, 7, 35, 36] # Peak R og derefter de 6 features til modellen
 Vyntus_data = HentCSV.X_test[:,Model_features]
+
+new_row = np.array([[1.08, 0.668, 104.5, 1.416, 2.03, 0.755, None]]) #En falsk patient som har en null værdi
+Vyntus_data = np.vstack([new_row, Vyntus_data])
 
 # --- Vælg mappe at gemme rapporten i --- #
 def choose_directory():
