@@ -124,7 +124,7 @@ def PDF_error(filepath):
     error_messagge = c.beginText()
     error_messagge.setTextOrigin(margin_x+75,475)
     error_messagge.setFont("Arial-Bold",15)
-    error_messagge.textLines("CPET AId kunne ikke udregne en sandsynlighed,\n grundt manglende værdier.")
+    error_messagge.textLines("CPET AId kunne ikke klassificere patienten,\n grundet manglende værdier.")
     
     c.drawText(error_messagge)
     c.save()
