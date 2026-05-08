@@ -69,4 +69,7 @@ cm = confusion_matrix(y_test, y_pred)
 classification_names = ["Kardielt", "Pulmonalt", "Muskulært", "Rask"]
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=classification_names)
 disp.plot()
+
+# plt.savefig("ForvirringsmatrixModulTest.png", bbox_inches="tight")
 plt.show()
+

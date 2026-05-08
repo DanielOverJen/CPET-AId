@@ -100,6 +100,11 @@ def PDF_error(filepath):
     from reportlab.pdfgen import canvas
     from reportlab.lib import colors
     from reportlab.lib.pagesizes import A4
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+    
+    pdfmetrics.registerFont(TTFont('Arial','C:/Windows/Fonts/arial.ttf'))    
+    pdfmetrics.registerFont(TTFont('Arial-Bold','C:/Windows/Fonts/arialbd.ttf'))
 
     Max_width, Max_hight = A4
     margin_x = Max_width*0.1
