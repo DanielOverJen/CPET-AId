@@ -117,7 +117,7 @@ def PDF_error(filepath):
     # c.drawString(225,810,"CPET AId kan tage fejl")
     # c.drawString(225,790,"Nøjagtighed: 75%")
 
-    title="CPET AId error"
+    title="CPET AId resultater"
     c.setFillColor("black")
     c.setTitle(title)
     c.setFont("Arial",26) #font for title 

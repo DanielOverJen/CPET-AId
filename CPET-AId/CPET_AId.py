@@ -21,6 +21,7 @@ def CPET_AId(data, filepath):
         PDF_print.report(title="CPET AId resultat",
                           filename=filepath,
                           barchart= barchart,
-                          R_valid= R_validation, filepath_for_png="CPET-AId/CPET-AId/decisionplot.png")
+                          R_valid= R_validation,
+                          filepath_for_png="CPET-AId/CPET-AId/decisionplot.png")
     else:
         PDF_print.PDF_error(filepath)
