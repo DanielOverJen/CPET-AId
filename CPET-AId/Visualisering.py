@@ -25,7 +25,7 @@ def Barchart(data):
             bar_chart.bars[(0,i)].fillColor = colors.HexColor("#D3D6D7")
     
     bar_chart.barLabels.nudge = 10
-    bar_chart.barLabels.fontSize = 12
+    bar_chart.barLabels.fontSize = 11
     bar_chart.barLabelFormat = '%.1f%%'
     bar_chart.barLabels.fontName = "Arial-Bold"
     bar_chart.barLabels.fillColor = colors.black
