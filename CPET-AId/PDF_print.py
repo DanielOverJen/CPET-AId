@@ -91,8 +91,8 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
        og relaterer sig dermed ikke til de fysiologiske normalområder."""
     
     p2 = Paragraph(text2, styles["Normal"])
-    p2.wrap(400, 200)
-    p2.drawOn(c, 100, margin_y+20) #tegner figurtekst til beslutningsplot. Er blevet rykket lidt ned fra tidligere layout
+    p2.wrap(500, 200)
+    p2.drawOn(c, 50, margin_y+20) #tegner figurtekst til beslutningsplot. Er blevet rykket lidt ned fra tidligere layout
 
     c.save()
 
