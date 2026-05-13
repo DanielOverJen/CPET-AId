@@ -2,6 +2,7 @@ import shap
 import matplotlib.pyplot as plt
 from reportlab.lib import colors
 from reportlab.graphics.charts.barcharts import VerticalBarChart
+import numpy as np
 
 def Barchart(data):
     """Skal modtage et datasæt bestående af tuple på formen ("navn",tal)"""
@@ -108,11 +109,23 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
 
     xmin, xmax = ax.get_xlim()
 
-    ax.set_xticks([xmin, xmax])
-    ax.set_xticklabels(["Lavere sandsynlighed", "Højere sandsynlighed"])
+    # ax.set_xticks([xmin, xmax])
+    # ax.set_xticklabels(["Lavere sandsynlighed", "Højere sandsynlighed"])
 
+    ax.set_xticks(np.arange(0, 1.01, 0.1))
+    # ax.set_xticklabels(["0%", "10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"])
+    ax.set_xticklabels(["0%", "","20%","","40%","","60%","","80%","","100%"])
+
+    #Sætter standard gæt til at være ved 25%
     BaseValueLine = ax.lines[0] #Grå lodret basevalue linje 
-    BaseValueLine.set_visible(False)
+    BaseValueLineX = BaseValueLine.get_xdata()
+    BaseValueLineX[0] = 0.25
+    BaseValueLineX[-1] = 0.25
+
+    BaseValueLine.set_xdata(BaseValueLineX)
+
+
+    # BaseValueLine.set_visible(False) #Indkommenter hvis standardgæt linjen skal slettes.
     
     #Vandrette feature linjer
     width = 1
@@ -206,38 +219,54 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
         zorder = 10
     )
 
-    mid = (xmin + xmax) / 2
 
-    # definér områder (justér hvis du vil)
-    left_limit = xmin + 0.65 * (mid - xmin)
-    right_limit = mid + 0.15 * (xmax - mid)
+    #Sætter alles startpunkt til at være ved 25%
+    CardiacX[0] = 0.25
+    CardiacLine.set_xdata(CardiacX)
+    
+    PulmoX[0] = 0.25
+    PulmoLine.set_xdata(PulmoX)
+    
+    MuscoX[0] = 0.25
+    MuscoLine.set_xdata(MuscoX)
+    
+    HealthyX[0] = 0.25
+    HealthyLine.set_xdata(HealthyX)
 
-    count_left = 0
-    count_right = 0
 
-    lines = ax.lines[6:9]
-    for line in lines:
-        x = line.get_xdata()
-        if len(x) > 1:
-            # brug punkt efter første feature
-            x_val = x[1]
 
-            if x_val <= left_limit:
-                count_left += 1
-            elif x_val >= right_limit:
-                count_right += 1
+    # mid = (xmin + xmax) / 2
 
-    threshold = 1
-    # vælg side med mindst "trafik"
-    if count_left > count_right and count_left >= threshold:
-        loc = "lower right"
-    elif count_right > count_left and count_right >= threshold:
-        loc = "lower left"
-    else:
-        # hvis det er tæt → fallback
-        loc = "lower right"
+    # # definér områder (justér hvis du vil)
+    # left_limit = xmin + 0.65 * (mid - xmin)
+    # right_limit = mid + 0.15 * (xmax - mid)
 
-    location = loc
+    # count_left = 0
+    # count_right = 0
+
+    # lines = ax.lines[6:9]
+    # for line in lines:
+    #     x = line.get_xdata()
+    #     if len(x) > 1:
+    #         # brug punkt efter første feature
+    #         x_val = x[1]
+
+    #         if x_val <= left_limit:
+    #             count_left += 1
+    #         elif x_val >= right_limit:
+    #             count_right += 1
+
+    # threshold = 1
+    # # vælg side med mindst "trafik"
+    # if count_left > count_right and count_left >= threshold:
+    #     loc = "lower right"
+    # elif count_right > count_left and count_right >= threshold:
+    #     loc = "lower left"
+    # else:
+    #     # hvis det er tæt → fallback
+    #     loc = "lower right"
+
+    location = "lower right"
 
     ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = location)
     
