@@ -18,6 +18,7 @@ def Barchart(data):
 
     max_value = max(values)
 
+    #Finder farver til søjlerne ud fra hvilken der er størst
     for i, v in enumerate(values):
         if v == max_value:
             bar_chart.bars[(0,i)].fillColor = colors.HexColor("#211a52")
@@ -96,9 +97,9 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
         # plot_color = "gist_rainbow",
         feature_order = [1, 3, 2, 4, 0, 5],
         title = "CPET AId beslutningsudvikling",
-        auto_size_plot= False
+        auto_size_plot= False,
         # new_base_value = global_base_values
-        # link="logit"
+        link="logit"
     )
     # fjern label
     plt.gca().set_xlabel("")

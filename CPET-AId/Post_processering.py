@@ -23,7 +23,6 @@ def post_processing(Peak_R, pre_processed_data):
 
     # Loader ML-modellen
     CPETAIdModel = XGBClassifier()
-    # CPETAIdModel.load_model("CPET-AId/CPET-AId/CPETAId_model.json")
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(current_dir, "CPETAId_model.json")
