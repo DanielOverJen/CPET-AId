@@ -108,7 +108,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
         # legend_location="lower right",
         show=False,
         # plot_color = "gist_rainbow",
-        feature_order = [1, 3, 2, 4, 0, 5],
+        feature_order = [1, 3, 2, 4, 0, 5], #Den ønskede rækkefølge
         title = "CPET AId beslutningsudvikling",
         auto_size_plot= False,
         # new_base_value = global_base_values
