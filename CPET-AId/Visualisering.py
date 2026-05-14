@@ -66,9 +66,21 @@ def Draw_table(data):
 
 def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     """Gemmer et png af et decisionplot med det højest sandsynlige fysiologisk system markeret"""
+   
+   
+    #Elementer til at lave mockup plot
+    feature_names_values = [
+            f"Afvigelse fra forventet Peak VO2 \n = XX %",
+            f"Peak minutventilation (VE) \n = XX L/min",
+            f"Hældningen af O2-pulsen i testens \n første halvdel = XX",
+            f"Spredningen af VE/VCO2 \n = XX",
+            f"Afvigelse fra forventet Peak O2-puls \n = XX %",
+            f"Hældningen af VO2 i testens \n første halvdel = XX"
+        ] 
+   
     name, proba = zip(*Class_proba) #Deler input sandsynligheder op i 2 arrays
     
-    max_index = proba.index(max(proba))
+    # max_index = proba.index(max(proba))
 
     Cardiacpercent = str(proba[0]) 
     CardiacLabelname = "K: "+ name[0]+"("+Cardiacpercent+"%)"
@@ -107,7 +119,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     ax = plt.gca()
     plt.rcParams["font.family"] = "Arial"
 
-    xmin, xmax = ax.get_xlim()
+    # xmin, xmax = ax.get_xlim()
 
     # ax.set_xticks([xmin, xmax])
     # ax.set_xticklabels(["Lavere sandsynlighed", "Højere sandsynlighed"])
@@ -142,6 +154,12 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     CardiacX = CardiacLine.get_xdata()
     CardiacY = CardiacLine.get_ydata()
 
+    #Sætter alles startpunkt til at være ved 25% og rykker endpoint så det passer med 
+    #procenterne
+    CardiacX[0] = 0.25
+    CardiacX[-1] = 0.825    
+    CardiacLine.set_xdata(CardiacX)
+    
 
     # slutpunktet af linjen
     x_end = CardiacX[-1]-0.03
@@ -163,6 +181,10 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     
     PulmoX = PulmoLine.get_xdata()
     PulmoY = PulmoLine.get_ydata()
+    PulmoX[0] = 0.25
+    PulmoX[-1] = 0.011
+    PulmoLine.set_xdata(PulmoX)
+    
 
     # slutpunktet af linjen
     x_end = PulmoX[-1]-0.03
@@ -183,6 +205,10 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     MuscoX = MuscoLine.get_xdata()
     MuscoY = MuscoLine.get_ydata()
 
+    MuscoX[0] = 0.25
+    MuscoX[-1] = 0.16
+    MuscoLine.set_xdata(MuscoX)
+    
     # slutpunktet af linjen
     x_end = MuscoX[-1]-0.03
     y_end = MuscoY[-1]+0.01
@@ -204,6 +230,10 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     HealthyX = HealthyLine.get_xdata()
     HealthyY = HealthyLine.get_ydata()
     
+    HealthyX[0] = 0.25
+    HealthyX[-1] = 0.04
+    HealthyLine.set_xdata(HealthyX)
+
 
     # slutpunktet af linjen
     x_end = HealthyX[-1]-0.03
@@ -220,18 +250,6 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     )
 
 
-    #Sætter alles startpunkt til at være ved 25%
-    CardiacX[0] = 0.25
-    CardiacLine.set_xdata(CardiacX)
-    
-    PulmoX[0] = 0.25
-    PulmoLine.set_xdata(PulmoX)
-    
-    MuscoX[0] = 0.25
-    MuscoLine.set_xdata(MuscoX)
-    
-    HealthyX[0] = 0.25
-    HealthyLine.set_xdata(HealthyX)
 
 
 
