@@ -79,7 +79,7 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
         preserveAspectRatio=True,
     )
 
-    text = """Et søjlediagram hvor sandsynlighederne for det pågældende fysiologiske system er det begrænsende for patienten."""
+    text = """Et søjlediagram over sandsynlighederne for at et fysiologisk system er årsagen til arbejdsintolerance."""
     
     p = Paragraph(text, styles["Normal"])
     p.wrap(400,200)
