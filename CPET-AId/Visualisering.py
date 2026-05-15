@@ -271,6 +271,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = location)
     
     plt.savefig("CPET-AId/CPET-AId/decisionplot.png", bbox_inches="tight")
+    plt.close()
     # plt.show()
 
 
@@ -351,6 +352,15 @@ c.drawString(x_centered,465,inputstring)
 typestring = "Søjlediagram 1 type: " + str(type(barchart))
 c.drawString(x_centered,445,typestring)
 
+parameterstring = "Højde: " + str(barchart.height) + ", Bredde: " + str(barchart.width) + ", Skriftstørrelse: " + str(barchart.barLabels.fontSize) + ", Font: " + str(barchart.valueAxis.labels.fontName) + " og " + str(barchart.barLabels.fontName)
+c.drawString(x_centered,425,parameterstring)
+
+
+# print(barchart3.height)
+# print(barchart3.barLabels.fontSize)
+# print(barchart3.barLabels.fontName)
+# print(barchart3.valueAxis.labels.fontName)
+
 
 c.setFont('Arial',12) #font for title 
 c.drawString(x,372,"Søjlediagram 2")
@@ -367,12 +377,13 @@ c.drawString(x_centered,120,inputstring)
 typestring = "Søjlediagram 2 type: " + str(type(barchart2))
 c.drawString(x_centered,100,typestring)
 
+parameterstring = "Højde: " + str(barchart2.height) + ", Bredde: " + str(barchart2.width) + ", Skriftstørrelse: " + str(barchart2.barLabels.fontSize) + ", Font: " + str(barchart2.valueAxis.labels.fontName) + " og " + str(barchart2.barLabels.fontName)
+c.drawString(x_centered,80,parameterstring)
+
 
 
 # Ny side
 c.showPage()
-
-
 
 
 
@@ -392,6 +403,11 @@ c.drawString(x_centered,465,inputstring)
 typestring = "Søjlediagram 3 type: " + str(type(barchart3))
 c.drawString(x_centered,445,typestring)
 
+parameterstring = "Højde: " + str(barchart3.height) + ", Bredde: " + str(barchart3.width) + ", Skriftstørrelse: " + str(barchart3.barLabels.fontSize) + ", Font: " + str(barchart3.valueAxis.labels.fontName) + " og " + str(barchart3.barLabels.fontName)
+c.drawString(x_centered,425,parameterstring)
+
+
+
 c.setFont('Arial',12) #font for title 
 c.drawString(x,372,"Søjlediagram 4")
 
@@ -408,6 +424,10 @@ c.drawString(x_centered,130,inputstring)
 typestring = "Søjlediagram 4 type: " + str(type(barchart4))
 c.drawString(x_centered,100,typestring)
 
+parameterstring = "Højde: " + str(barchart4.height) + ", Bredde: " + str(barchart4.width) + ", Skriftstørrelse: " + str(barchart4.barLabels.fontSize) + ", Font: " + str(barchart4.valueAxis.labels.fontName) + " og " + str(barchart4.barLabels.fontName)
+c.drawString(x_centered,80,parameterstring)
+
+
 c.save()
 
 
@@ -418,7 +438,7 @@ c.save()
 
 
 
-
+from reportlab.lib.utils import ImageReader
 
 #########################################Test af Decisionplot############################3
 
@@ -434,38 +454,440 @@ y = Max_hight - margin_y
 c.setFillColor("black")
 c.setTitle("Modultest Decisionplot.pdf")
 c.setFont('Arial',26) #font for title 
-c.drawString(x,y,"Modultest Decisionplot")
+c.drawString(x,y+5,"Modultest Decisionplot")
 
 
-c.setFont('Arial',12) #font for title 
-c.drawString(x,y-50,"Beslutningsplot 1")
 
 # Patient 5;
-Shap_values1 = [[
-  [ 0.78798157, -0.31402695,  0.04011863, -0.9707369 ],
-  [ 0.0323705,  -0.46186036,  0.5747566,  -0.16537623],
-  [-0.04824072, -0.10042012,  0.01773896,  0.12267144],
-  [-0.24123555,  0.26461136, -0.5246118,  -0.7999075 ],
-  [ 0.47733706, -0.8367276,   0.35610256, -1.0144894 ],
-  [ 0.6645622,  -0.5206991,  -0.23113263, -1.2991651 ]
+shap_values1 = [[
+  [ 0.78798, -0.31402,  0.04011, -0.97073 ],
+  [ 0.03237,  -0.46186,  0.57475,  -0.16537],
+  [-0.04824, -0.10042,  0.01773,  0.12267],
+  [-0.24123,  0.26461, -0.52461,  -0.79990 ],
+  [ 0.47733, -0.83672,   0.35610, -1.01448 ],
+  [ 0.66456,  -0.52069,  -0.23113, -1.29916 ]
   ]]
-Base_values1 =[0.09750652313232422, -0.538670003414154, -0.10174283385276794, 0.537470281124115]
+
+
+import numpy as np
+
+# Fra (1,6,4) -> (4,1,6)
+shap_values1 = np.transpose(shap_values1, (2, 0, 1))
+
+# Konverter til liste af arrays
+shap_values1 = [arr for arr in shap_values1]
+base_values1 = [0.09750, -0.53867, -0.10174, 0.53747]
+
+
+
 
 Proba1 = [("Kardielt", 82.5),("Pulmonalt", 1.1),("Muskulært", 16.0),("Rask", 0.4)]
 
-# Feature Values
-# [[ 0.81416587 48.3         0.50944644  3.03949345  0.67707986  0.07846154]]
+pre_processed_data = [ 0.81416587, 48.3,         0.50944644,  3.03949345,  0.67707986,  0.07846154]
 
-decisionplot(Proba1, feature_names_values, Shap_values1, Base_values1)
+
+ # Array med ML-modellens feature-navne og de tilhørende værdier
+feature_names_values1 = [
+            f"Afvigelse fra forventet Peak VO2 \n = {round(pre_processed_data[0]*100,1)} %",
+            f"Peak minutventilation (VE) \n = {round(pre_processed_data[1],1)} L/min",
+            f"Hældningen af O2-pulsen i testens \n første halvdel = {round(pre_processed_data[2],3)}",
+            f"Spredningen af VE/VCO2 \n = {round(pre_processed_data[3],2)}",
+            f"Afvigelse fra forventet Peak O2-puls \n = {round(pre_processed_data[4]*100,1)} %",
+            f"Hældningen af VO2 i testens \n første halvdel = {round(pre_processed_data[5],3)}"
+        ]
+
+pre_processed_data[0] = round(pre_processed_data[0]*100,1)
+pre_processed_data[1] = round(pre_processed_data[1],1)
+pre_processed_data[2] = round(pre_processed_data[2],3)
+pre_processed_data[3] = round(pre_processed_data[3],2)
+pre_processed_data[4] = round(pre_processed_data[4]*100,1)
+pre_processed_data[5] = round(pre_processed_data[5],3)
+
+
+decisionplot(Proba1, feature_names_values1, shap_values1, base_values1)
+
+image1 = ImageReader("CPET-AId\\CPET-AId\\decisionplot.png")
+
+
+c.setFont('Arial',12) #font for title 
+c.drawString(x,y-20,"Beslutningsplot 1")
+
+Imageheight = 280
+Imagewidth = 500
 
 c.drawImage(
-    "CPET-AId\CPET-AId\Beslutningsplot.png",
+    image1,
     50,
-    50,
-    height=500,
-    width=500,
-    preserveAspectRatio=True,
+    450,
+    height=Imageheight,
+    width=Imagewidth,
 )
+
+inputstring = "SHAP værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,430,inputstring)
+c.drawString(x_centered,415,str(shap_values1[0]))
+c.drawString(x_centered,400,str(shap_values1[1]))
+c.drawString(x_centered,385,str(shap_values1[2]))
+c.drawString(x_centered,370,str(shap_values1[3]))
+
+
+baseinputstring = "Basis værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,330,baseinputstring)
+c.drawString(x_centered, 315, str(base_values1))
+
+
+featureString = "Feature værdier input: "
+c.drawString(x_centered,275,featureString)
+c.drawString(x_centered,260, str(pre_processed_data))
+
+mlmodelstring = "Ml model sandsynligheder input: "
+c.drawString(x_centered,220,mlmodelstring)
+c.drawString(x_centered,205, str(Proba1))
+
+
+
+typestring = "Beslutningsplot 1 type: " 
+c.drawString(x_centered,165,typestring)
+c.drawString(x_centered,150, str(type(image1)))
+
+
+parameterstring = "Højde: " + str(Imageheight) + ", Bredde: " + str(Imagewidth) + ", Skriftstørrelse: " + str(11) + ", Font: 'Arial'" 
+c.drawString(x_centered,110,parameterstring)
+
+# Ny side
+c.showPage()
+
+
+
+# Patient 5;
+shap_values1 = [[
+  [ 0.78798, -0.31402,  0.04011, -0.97073 ],
+  [ 0.03237,  -0.46186,  0.57475,  -0.16537],
+  [-0.04824, -0.10042,  0.01773,  0.12267],
+  [-0.24123,  0.26461, -0.52461,  -0.79990 ],
+  [ 0.47733, -0.83672,   0.35610, -1.01448 ],
+  [ 0.66456,  -0.52069,  -0.23113, -1.29916 ]
+  ]]
+
+
+
+
+import numpy as np
+
+# Fra (1,6,4) -> (4,1,6)
+shap_values1 = np.transpose(shap_values1, (2, 0, 1))
+
+# Konverter til liste af arrays
+shap_values1 = [arr for arr in shap_values1]
+base_values1 = [0.0, 0.0, 1.000174, 0.0]
+
+
+
+
+Proba1 = [("Kardielt", 82.5),("Pulmonalt", 1.1),("Muskulært", 16.0),("Rask", 0.4)]
+
+pre_processed_data = [ 0.81416587, 48.3,         0.50944644,  3.03949345,  0.67707986,  0.07846154]
+
+
+ # Array med ML-modellens feature-navne og de tilhørende værdier
+feature_names_values1 = [
+            f"Afvigelse fra forventet Peak VO2 \n = {round(pre_processed_data[0]*100,1)} %",
+            f"Peak minutventilation (VE) \n = {round(pre_processed_data[1],1)} L/min",
+            f"Hældningen af O2-pulsen i testens \n første halvdel = {round(pre_processed_data[2],3)}",
+            f"Spredningen af VE/VCO2 \n = {round(pre_processed_data[3],2)}",
+            f"Afvigelse fra forventet Peak O2-puls \n = {round(pre_processed_data[4]*100,1)} %",
+            f"Hældningen af VO2 i testens \n første halvdel = {round(pre_processed_data[5],3)}"
+        ]
+
+pre_processed_data[0] = round(pre_processed_data[0]*100,1)
+pre_processed_data[1] = round(pre_processed_data[1],1)
+pre_processed_data[2] = round(pre_processed_data[2],3)
+pre_processed_data[3] = round(pre_processed_data[3],2)
+pre_processed_data[4] = round(pre_processed_data[4]*100,1)
+pre_processed_data[5] = round(pre_processed_data[5],3)
+
+
+decisionplot(Proba1, feature_names_values1, shap_values1, base_values1)
+
+image1 = ImageReader("CPET-AId\\CPET-AId\\decisionplot.png")
+
+
+c.setFont('Arial',12) #font for title 
+c.drawString(x,y-20,"Beslutningsplot 2")
+
+Imageheight = 280
+Imagewidth = 500
+
+c.drawImage(
+    image1,
+    50,
+    450,
+    height=Imageheight,
+    width=Imagewidth,
+)
+
+inputstring = "SHAP værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,430,inputstring)
+c.drawString(x_centered,415,str(shap_values1[0]))
+c.drawString(x_centered,400,str(shap_values1[1]))
+c.drawString(x_centered,385,str(shap_values1[2]))
+c.drawString(x_centered,370,str(shap_values1[3]))
+
+
+baseinputstring = "Basis værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,330,baseinputstring)
+c.drawString(x_centered, 315, str(base_values1))
+
+
+featureString = "Feature værdier input: "
+c.drawString(x_centered,275,featureString)
+c.drawString(x_centered,260, str(pre_processed_data))
+
+mlmodelstring = "Ml model sandsynligheder input: "
+c.drawString(x_centered,220,mlmodelstring)
+c.drawString(x_centered,205, str(Proba1))
+
+
+
+typestring = "Beslutningsplot 2 type: " 
+c.drawString(x_centered,165,typestring)
+c.drawString(x_centered,150, str(type(image1)))
+
+
+parameterstring = "Højde: " + str(Imageheight) + ", Bredde: " + str(Imagewidth) + ", Skriftstørrelse: " + str(11) + ", Font: 'Arial'" 
+c.drawString(x_centered,110,parameterstring)
+
+
+
+
+
+
+
+# Ny side
+c.showPage()
+
+
+
+# Patient 5;
+shap_values1 = [[
+  [ 10.78798, -0.31402,  0.04011, -0.97073 ],
+  [ 100.03237,  -0.46186,  0.57475,  -0.16537],
+  [-40.04824, -0.10042,  0.01773,  0.12267],
+  [-2.24123,  0.26461, -0.52461,  -0.79990 ],
+  [ 0.47733, -0.83672,   0.35610, -1.01448 ],
+  [ -50.66456,  -0.52069,  -0.23113, -1.29916 ]
+  ]]
+
+
+
+
+import numpy as np
+
+# Fra (1,6,4) -> (4,1,6)
+shap_values1 = np.transpose(shap_values1, (2, 0, 1))
+
+# Konverter til liste af arrays
+shap_values1 = [arr for arr in shap_values1]
+base_values1 = [0.09750, -0.53867, -0.10174, 0.53747]
+
+
+
+
+
+Proba1 = [("Kardielt", 8200.5),("Pulmonalt", 0.00001),("Muskulært", 16.0),("Rask", 0.4)]
+
+pre_processed_data = [ 0.81416587, 48.3,         0.50944644,  3.03949345,  0.67707986,  0.07846154]
+
+
+ # Array med ML-modellens feature-navne og de tilhørende værdier
+feature_names_values1 = [
+            f"Afvigelse fra forventet Peak VO2 \n = {round(pre_processed_data[0]*100,1)} %",
+            f"Peak minutventilation (VE) \n = {round(pre_processed_data[1],1)} L/min",
+            f"Hældningen af O2-pulsen i testens \n første halvdel = {round(pre_processed_data[2],3)}",
+            f"Spredningen af VE/VCO2 \n = {round(pre_processed_data[3],2)}",
+            f"Afvigelse fra forventet Peak O2-puls \n = {round(pre_processed_data[4]*100,1)} %",
+            f"Hældningen af VO2 i testens \n første halvdel = {round(pre_processed_data[5],3)}"
+        ]
+
+pre_processed_data[0] = round(pre_processed_data[0]*100,1)
+pre_processed_data[1] = round(pre_processed_data[1],1)
+pre_processed_data[2] = round(pre_processed_data[2],3)
+pre_processed_data[3] = round(pre_processed_data[3],2)
+pre_processed_data[4] = round(pre_processed_data[4]*100,1)
+pre_processed_data[5] = round(pre_processed_data[5],3)
+
+
+decisionplot(Proba1, feature_names_values1, shap_values1, base_values1)
+
+image1 = ImageReader("CPET-AId\\CPET-AId\\decisionplot.png")
+
+
+c.setFont('Arial',12) #font for title 
+c.drawString(x,y-20,"Beslutningsplot 3")
+
+Imageheight = 280
+Imagewidth = 500
+
+c.drawImage(
+    image1,
+    50,
+    450,
+    height=Imageheight,
+    width=Imagewidth,
+)
+
+inputstring = "SHAP værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,430,inputstring)
+c.drawString(x_centered,415,str(shap_values1[0]))
+c.drawString(x_centered,400,str(shap_values1[1]))
+c.drawString(x_centered,385,str(shap_values1[2]))
+c.drawString(x_centered,370,str(shap_values1[3]))
+
+
+baseinputstring = "Basis værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,330,baseinputstring)
+c.drawString(x_centered, 315, str(base_values1))
+
+
+featureString = "Feature værdier input: "
+c.drawString(x_centered,275,featureString)
+c.drawString(x_centered,260, str(pre_processed_data))
+
+mlmodelstring = "Ml model sandsynligheder input: "
+c.drawString(x_centered,220,mlmodelstring)
+c.drawString(x_centered,205, str(Proba1))
+
+
+
+typestring = "Beslutningsplot 3 type: " 
+c.drawString(x_centered,165,typestring)
+c.drawString(x_centered,150, str(type(image1)))
+
+
+parameterstring = "Højde: " + str(Imageheight) + ", Bredde: " + str(Imagewidth) + ", Skriftstørrelse: " + str(11) + ", Font: 'Arial'" 
+c.drawString(x_centered,110,parameterstring)
+
+
+
+
+
+# Ny side
+c.showPage()
+
+
+
+# Patient 5;
+shap_values1 = [[
+  [ 0.0, -0.31402,  0.04011, -0.97073 ],
+  [ 0.0,  -0.46186,  0.57475,  -0.16537],
+  [0.0, -0.10042,  0.01773,  0.12267],
+  [0.0,  0.26461, -0.52461,  -0.79990 ],
+  [ 0.0, -0.83672,   0.35610, -1.01448 ],
+  [ -0.0,  -0.52069,  -0.23113, -1.29916 ]
+  ]]
+
+
+
+
+import numpy as np
+
+# Fra (1,6,4) -> (4,1,6)
+shap_values1 = np.transpose(shap_values1, (2, 0, 1))
+
+# Konverter til liste af arrays
+shap_values1 = [arr for arr in shap_values1]
+base_values1 = [0.0, -0.0, -0.0, 0.0]
+
+
+
+
+
+Proba1 = [("Kardielt", 8200.5),("Pulmonalt", 0.00001),("Muskulært", 16.0),("Rask", 0.4)]
+
+pre_processed_data = [ 0.81416587, 48.3,         0.50944644,  3.03949345,  0.67707986,  0.07846154]
+
+
+ # Array med ML-modellens feature-navne og de tilhørende værdier
+feature_names_values1 = [
+            f"Afvigelse fra forventet Peak VO2 \n = {round(pre_processed_data[0]*100,1)} %",
+            f"Peak minutventilation (VE) \n = {round(pre_processed_data[1],1)} L/min",
+            f"Hældningen af O2-pulsen i testens \n første halvdel = {round(pre_processed_data[2],3)}",
+            f"Spredningen af VE/VCO2 \n = {round(pre_processed_data[3],2)}",
+            f"Afvigelse fra forventet Peak O2-puls \n = {round(pre_processed_data[4]*100,1)} %",
+            f"Hældningen af VO2 i testens \n første halvdel = {round(pre_processed_data[5],3)}"
+        ]
+
+pre_processed_data[0] = round(pre_processed_data[0]*100,1)
+pre_processed_data[1] = round(pre_processed_data[1],1)
+pre_processed_data[2] = round(pre_processed_data[2],3)
+pre_processed_data[3] = round(pre_processed_data[3],2)
+pre_processed_data[4] = round(pre_processed_data[4]*100,1)
+pre_processed_data[5] = round(pre_processed_data[5],3)
+
+
+decisionplot(Proba1, feature_names_values1, shap_values1, base_values1)
+
+image1 = ImageReader("CPET-AId\\CPET-AId\\decisionplot.png")
+
+
+c.setFont('Arial',12) #font for title 
+c.drawString(x,y-20,"Beslutningsplot 4")
+
+Imageheight = 280
+Imagewidth = 500
+
+c.drawImage(
+    image1,
+    50,
+    450,
+    height=Imageheight,
+    width=Imagewidth,
+)
+
+inputstring = "SHAP værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,430,inputstring)
+c.drawString(x_centered,415,str(shap_values1[0]))
+c.drawString(x_centered,400,str(shap_values1[1]))
+c.drawString(x_centered,385,str(shap_values1[2]))
+c.drawString(x_centered,370,str(shap_values1[3]))
+
+
+baseinputstring = "Basis værdier input: "
+c.setFont('Arial',12) #font for title 
+c.drawString(x_centered,330,baseinputstring)
+c.drawString(x_centered, 315, str(base_values1))
+
+
+featureString = "Feature værdier input: "
+c.drawString(x_centered,275,featureString)
+c.drawString(x_centered,260, str(pre_processed_data))
+
+mlmodelstring = "Ml model sandsynligheder input: "
+c.drawString(x_centered,220,mlmodelstring)
+c.drawString(x_centered,205, str(Proba1))
+
+
+
+typestring = "Beslutningsplot 4 type: " 
+c.drawString(x_centered,165,typestring)
+c.drawString(x_centered,150, str(type(image1)))
+
+
+parameterstring = "Højde: " + str(Imageheight) + ", Bredde: " + str(Imagewidth) + ", Skriftstørrelse: " + str(11) + ", Font: 'Arial'" 
+c.drawString(x_centered,110,parameterstring)
+
+
+
+
+
+
 
 c.save()
 
@@ -473,30 +895,30 @@ c.save()
 
 
 
-#Patient 6:
-Shap_values2 =[[
-  [ 0.6356973,  -0.31540003, -0.30324632, -1.1946781 ]
-  [ 0.33193555, -0.29285127, -0.81566703, -0.10770864]
-  [ 0.5091625,  -0.63144016, -0.2364658,  -0.2761005 ]
-  [ 0.48417282,  0.07912832, -0.9779154,   0.3928914 ]
-  [ 0.00981862, -0.42130688, -0.3593603,  -0.40897375]
-  [-0.6991844,  -1.3953285,   0.21650329,  1.4198644 ]
-  ]]
-Base_values2 = [0.09750652313232422, -0.538670003414154, -0.10174283385276794, 0.537470281124115]
+# #Patient 6:
+# Shap_values2 =[[
+#   [ 0.6356973,  -0.31540003, -0.30324632, -1.1946781 ],
+#   [ 0.33193555, -0.29285127, -0.81566703, -0.10770864],
+#   [ 0.5091625,  -0.63144016, -0.2364658,  -0.2761005 ],
+#   [ 0.48417282,  0.07912832, -0.9779154,   0.3928914 ],
+#   [ 0.00981862, -0.42130688, -0.3593603,  -0.40897375],
+#   [-0.6991844,  -1.3953285,   0.21650329,  1.4198644 ]
+#   ]]
+# Base_values2 = [0.09750652313232422, -0.538670003414154, -0.10174283385276794, 0.537470281124115]
 
-Proba2 = [("Kardielt", 71.8),("Pulmonalt", 0.5),("Muskulært", 1.4),("Rask", 26.3)]
+# Proba2 = [("Kardielt", 71.8),("Pulmonalt", 0.5),("Muskulært", 1.4),("Rask", 26.3)]
 
-# Feature Values
-# [[ 0.68685807 56.58333333  1.63155849  0.90499717  0.95303932  0.20733263]]
+# # Feature Values
+# # [[ 0.68685807 56.58333333  1.63155849  0.90499717  0.95303932  0.20733263]]
 
 
-#Patient 7
-# Shap
-# [[[ 0.7987291  -0.06454745 -0.4584995  -1.2239481 ]
-#   [ 0.5826505  -0.24001962 -1.2383113  -0.17743333]
-#   [-0.06576226 -0.08508807  0.02363913  0.02176452]
-#   [-0.17207584 -0.63507736 -0.639844   -0.42397532]
-#   [ 0.06812508 -1.3545815   0.13933516  1.4791169 ]
+# #Patient 7
+# # Shap
+# # [[[ 0.7987291  -0.06454745 -0.4584995  -1.2239481 ]
+# #   [ 0.5826505  -0.24001962 -1.2383113  -0.17743333]
+# #   [-0.06576226 -0.08508807  0.02363913  0.02176452]
+# #   [-0.17207584 -0.63507736 -0.639844   -0.42397532]
+# #   [ 0.06812508 -1.3545815   0.13933516  1.4791169 ]
 #   [ 0.29278153  0.4100879  -0.12919219 -1.5965527 ]]]
 # Base
 # [0.09750652313232422, -0.538670003414154, -0.10174283385276794, 0.537470281124115]
