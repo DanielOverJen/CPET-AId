@@ -1,4 +1,4 @@
-def report(filename, R_valid=False, title=None, barchart = None, filepath_for_png = None):
+def report(filename, R_valid=False, title=None, barchart = None, decisionplot = None):
     """Function to generate PDF, 1.input: name of the file, 2.input the title,
       3.input data for the barchart, 4.input data for the filepath for .png, 5.input is the R-value"""
     from reportlab.pdfgen import canvas
@@ -71,12 +71,12 @@ def report(filename, R_valid=False, title=None, barchart = None, filepath_for_pn
     renderPDF.draw(drawing,c,x_centered,505) #placering af barchart
     
     c.drawImage(
-        filepath_for_png,
+        decisionplot,
         50,
-        50,
-        height=500,
+        150,
+        height=280,
         width=500,
-        preserveAspectRatio=True,
+        # preserveAspectRatio=True,
     )
 
     text = """Et søjlediagram over sandsynlighederne for at et fysiologisk system er årsagen til arbejdsintolerance."""

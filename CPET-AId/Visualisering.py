@@ -2,6 +2,7 @@ import shap
 import matplotlib.pyplot as plt
 from reportlab.lib import colors
 from reportlab.graphics.charts.barcharts import VerticalBarChart
+from reportlab.lib.utils import ImageReader
 import numpy as np
 
 def Barchart(data):
@@ -271,7 +272,11 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = location)
     
     plt.savefig("CPET-AId/CPET-AId/decisionplot.png", bbox_inches="tight")
-    # plt.show()
+
+    decisionplotImage = ImageReader("CPET-AId\\CPET-AId\\decisionplot.png")
+    plt.close()
+    return decisionplotImage
+
 
 
 # #Test af kode 
