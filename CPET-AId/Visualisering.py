@@ -271,7 +271,11 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
 
     ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = location)
     
-    plt.savefig("CPET-AId/CPET-AId/decisionplot.png", bbox_inches="tight")
+    cm = 1 / 2.54
+    plt.tight_layout()
+    plt.gcf().set_size_inches(17.63 * cm, 9.88 * cm)
+
+    plt.savefig("CPET-AId/CPET-AId/decisionplot.png", dpi=300) #, bbox_inches="tight"
 
     decisionplotImage = ImageReader("CPET-AId\\CPET-AId\\decisionplot.png")
     plt.close()

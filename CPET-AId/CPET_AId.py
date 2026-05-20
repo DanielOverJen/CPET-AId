@@ -2,7 +2,7 @@ import Datavalidering
 import ML_model
 import Post_processering
 import Visualisering
-import PDF_print
+
 
 def CPET_AId(data, filepath):
     peak_R = data[0]
@@ -17,11 +17,5 @@ def CPET_AId(data, filepath):
         barchart = Visualisering.Barchart(CPET_AId_proba)
         decisionplot = Visualisering.decisionplot(CPET_AId_proba, feature_names_values, shap_values, base_values)
 
+    print("Done")
         
-        PDF_print.report(title="CPET AId resultat",
-                          filename=filepath,
-                          barchart= barchart,
-                          R_valid= R_validation,
-                          decisionplot=decisionplot)
-    else:
-        PDF_print.PDF_error(filepath)
