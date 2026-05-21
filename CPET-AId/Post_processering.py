@@ -3,6 +3,13 @@ import os
 # import sys
 import numpy as np
 from xgboost import XGBClassifier
+# Loader ML-modellen
+CPETAIdModel = XGBClassifier()
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(current_dir, "CPETAId_model.json")
+
+CPETAIdModel.load_model(model_path)
 
 # sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
@@ -19,15 +26,7 @@ def post_processing(Peak_R, pre_processed_data):
 
     R_validation = bool(Peak_R >= 1.1)
 
-    # --- SHAP ---#
 
-    # Loader ML-modellen
-    CPETAIdModel = XGBClassifier()
-
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(current_dir, "CPETAId_model.json")
-
-    CPETAIdModel.load_model(model_path)
 
     # Array med ML-modellens feature-navne og de tilhørende værdier
     feature_names_values = [
@@ -39,6 +38,7 @@ def post_processing(Peak_R, pre_processed_data):
             f"Hældningen af VO2 i testens \n første halvdel = {round(pre_processed_data[5],3)}"
         ]
     
+    # --- SHAP ---#
     # Sørg for korrekt shape (2D)
     reshaped_data = np.array(pre_processed_data).reshape(1, -1)
 
