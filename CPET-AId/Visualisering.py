@@ -114,7 +114,6 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     # ax.set_xticklabels(["Lavere sandsynlighed", "Højere sandsynlighed"])
 
     ax.set_xticks(np.arange(0, 1.01, 0.1))
-    # ax.set_xticklabels(["0%", "10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"])
     ax.set_xticklabels(["0%", "","20%","","40%","","60%","","80%","","100%"])
 
     #Sætter standard gæt til at være ved 25%
@@ -271,11 +270,8 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
 
     ax.legend([CardiacLine,PulmoLine,MuscoLine, HealthyLine], classification_names, loc = location)
     
-    cm = 1 / 2.54
-    plt.tight_layout()
-    plt.gcf().set_size_inches(17.63 * cm, 9.88 * cm)
 
-    plt.savefig("CPET-AId/CPET-AId/decisionplot.png", dpi=300) #, bbox_inches="tight"
+    plt.savefig("CPET-AId/CPET-AId/decisionplot.png", bbox_inches="tight" )
 
     decisionplotImage = ImageReader("CPET-AId\\CPET-AId\\decisionplot.png")
     plt.close()
