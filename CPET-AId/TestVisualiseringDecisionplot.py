@@ -395,7 +395,7 @@ shap_values1 = np.transpose(shap_values1, (2, 0, 1))
 # Konverter til liste af arrays
 shap_values1 = [arr for arr in shap_values1]
 base_values1 = [0.0, -0.0, -0.0, 0.0]
-
+# base_values1 = [0.09750, -0.53867, -0.10174, 0.53747]
 
 
 

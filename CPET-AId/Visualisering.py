@@ -85,6 +85,11 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
 
     classification_names = [CardiacLabelname, PulmoLabelname,MuscoLabelname,HealthyLabelname]
 
+
+    
+    p = 0.25  # Probability 0.4
+    new_base_value = np.log(p / (1 - p))  # the logit function
+
     shap.multioutput_decision_plot(
         base_values,
         shap_values,
@@ -99,7 +104,7 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
         feature_order = [1, 3, 2, 4, 0, 5],
         title = "CPET AId beslutningsudvikling",
         auto_size_plot= False,
-        # new_base_value = global_base_values
+        new_base_value = new_base_value,
         link="logit"
     )
     # fjern label
@@ -116,13 +121,13 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     # ax.set_xticklabels(["0%", "10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"])
     ax.set_xticklabels(["0%", "","20%","","40%","","60%","","80%","","100%"])
 
-    #Sætter standard gæt til at være ved 25%
-    BaseValueLine = ax.lines[0] #Grå lodret basevalue linje 
-    BaseValueLineX = BaseValueLine.get_xdata()
-    BaseValueLineX[0] = 0.25
-    BaseValueLineX[-1] = 0.25
+    # #Sætter standard gæt til at være ved 25%
+    # BaseValueLine = ax.lines[0] #Grå lodret basevalue linje 
+    # BaseValueLineX = BaseValueLine.get_xdata()
+    # BaseValueLineX[0] = 0.25
+    # BaseValueLineX[-1] = 0.25
 
-    BaseValueLine.set_xdata(BaseValueLineX)
+    # BaseValueLine.set_xdata(BaseValueLineX)
 
 
     # BaseValueLine.set_visible(False) #Indkommenter hvis standardgæt linjen skal slettes.
@@ -220,18 +225,18 @@ def decisionplot(Class_proba, feature_names_values, shap_values, base_values):
     )
 
 
-    #Sætter alles startpunkt til at være ved 25%
-    CardiacX[0] = 0.25
-    CardiacLine.set_xdata(CardiacX)
+    # #Sætter alles startpunkt til at være ved 25%
+    # CardiacX[0] = 0.25
+    # CardiacLine.set_xdata(CardiacX)
     
-    PulmoX[0] = 0.25
-    PulmoLine.set_xdata(PulmoX)
+    # PulmoX[0] = 0.25
+    # PulmoLine.set_xdata(PulmoX)
     
-    MuscoX[0] = 0.25
-    MuscoLine.set_xdata(MuscoX)
+    # MuscoX[0] = 0.25
+    # MuscoLine.set_xdata(MuscoX)
     
-    HealthyX[0] = 0.25
-    HealthyLine.set_xdata(HealthyX)
+    # HealthyX[0] = 0.25
+    # HealthyLine.set_xdata(HealthyX)
 
 
 
